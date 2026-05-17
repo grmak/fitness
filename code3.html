@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-error": "#ffffff",
+                "surface-container-high": "#e8e8e8",
+                "primary-container": "#2e7d32",
+                "primary-fixed": "#a3f69c",
+                "on-surface-variant": "#40493d",
+                "secondary-fixed-dim": "#fabd00",
+                "secondary-fixed": "#ffdf9e",
+                "error-container": "#ffdad6",
+                "surface-variant": "#e2e2e2",
+                "error": "#ba1a1a",
+                "inverse-on-surface": "#f1f1f1",
+                "inverse-surface": "#2f3131",
+                "primary-fixed-dim": "#88d982",
+                "tertiary-fixed-dim": "#ffb3ac",
+                "background": "#f9f9f9",
+                "tertiary-container": "#d02d2d",
+                "on-primary": "#ffffff",
+                "on-surface": "#1a1c1c",
+                "on-secondary-fixed": "#261a00",
+                "on-tertiary": "#ffffff",
+                "surface-bright": "#f9f9f9",
+                "on-tertiary-fixed-variant": "#930010",
+                "inverse-primary": "#88d982",
+                "on-tertiary-fixed": "#410003",
+                "surface-container-low": "#f3f3f3",
+                "outline-variant": "#bfcaba",
+                "on-secondary-container": "#6c5000",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed-variant": "#5b4300",
+                "surface-container-highest": "#e2e2e2",
+                "on-primary-fixed-variant": "#005312",
+                "secondary-container": "#fdc003",
+                "on-primary-container": "#cbffc2",
+                "surface-container": "#eeeeee",
+                "primary": "#0d631b",
+                "surface": "#f9f9f9",
+                "surface-container-lowest": "#ffffff",
+                "secondary": "#785900",
+                "on-tertiary-container": "#ffedeb",
+                "tertiary-fixed": "#ffdad6",
+                "on-background": "#1a1c1c",
+                "surface-tint": "#1b6d24",
+                "on-secondary": "#ffffff",
+                "tertiary": "#ac0c18",
+                "on-primary-fixed": "#002204",
+                "surface-dim": "#dadada",
+                "outline": "#707a6c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "12px",
+                "xl": "32px",
+                "lg": "24px",
+                "md": "16px",
+                "base": "4px",
+                "sm": "12px",
+                "xs": "8px",
+                "safe-area-margin": "16px"
+            },
+            "fontFamily": {
+                "title-md": ["Plus Jakarta Sans"],
+                "title-lg": ["Plus Jakarta Sans"],
+                "kpi-display": ["Plus Jakarta Sans"],
+                "body-reg": ["Plus Jakarta Sans"],
+                "label-caps": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "kpi-display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-reg": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body class="font-body-reg text-on-surface">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm dark:bg-gray-950/80 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<h1 class="text-lg font-extrabold text-[#2E7D32] dark:text-green-500 tracking-tight font-['Plus_Jakarta_SANS']">Students</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined text-gray-500">search</span>
+</button>
+<button class="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined text-gray-500">filter_list</span>
+</button>
+</div>
+</header>
+<main class="px-safe-area-margin pb-24 pt-4">
+<!-- Proactive Alert Section -->
+<div class="mb-lg bg-error-container/30 border-l-4 border-error p-sm rounded-xl">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+<span class="font-label-caps text-error">AÇÕES RECOMENDADAS</span>
+</div>
+<p class="text-body-reg text-on-error-container">2 alunos possuem frequência abaixo de 25% esta semana.</p>
+</div>
+<!-- Section: Risco Elevado -->
+<section class="mb-lg">
+<div class="flex items-center gap-base mb-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<h2 class="font-title-md text-on-background">🔴 Risco elevado</h2>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Card Carlos -->
+<div class="bg-surface-container-lowest p-sm rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-error/20 transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-sm">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="A professional studio portrait of a fit middle-aged man with a short beard and athletic build, wearing a dark green performance polo shirt. The lighting is soft and directional, typical of a modern fitness studio environment with clean white walls and subtle wood accents. The image has a sharp, high-key light-mode aesthetic that communicates reliability and professionalism in a wellness context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1CN9PW0jvdoLT0-8Zt1O8GT6OlSMBAIjet6e3kjVzV8b8RQJe0QoyFfeAHrKgdLSjF0wtvHGC3OLlyoyds-YCyr5an3X867Jj1zTufbdW9njqXFASCGnlPhiw1tGk7RNS5_cFzFYZghBijPHyks-1RY8htKNVOAUruKlLihlTO5WNomITLtPWNpcBSajRNezERymMvEcBaaYe4wjWHX9P9GBK_uvUqlG2baaHcyTLdvC-fmt0mgmeKp_hax4qK3DN7ZBtbh_omNYT"/>
+<div>
+<h3 class="font-title-md">Carlos Silva</h3>
+<p class="text-xs text-gray-500 font-medium">Musculação • Manhã</p>
+</div>
+</div>
+<div class="bg-error-container text-on-error-container px-2 py-1 rounded-lg">
+<span class="font-label-caps text-[10px]">22% PRESENÇA</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="flex-1 bg-primary text-white font-label-caps h-11 rounded-lg flex items-center justify-center gap-xs active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            Enviar mensagem
+                        </button>
+<button class="w-11 h-11 border border-outline-variant text-outline rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card Mariana -->
+<div class="bg-surface-container-lowest p-sm rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-error/20 transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-sm">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+<div>
+<h3 class="font-title-md">Mariana Costa</h3>
+<p class="text-xs text-gray-500 font-medium">Pilates • Tarde</p>
+</div>
+</div>
+<div class="bg-error-container text-on-error-container px-2 py-1 rounded-lg">
+<span class="font-label-caps text-[10px]">25% PRESENÇA</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="flex-1 bg-primary text-white font-label-caps h-11 rounded-lg flex items-center justify-center gap-xs active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            Enviar mensagem
+                        </button>
+<button class="w-11 h-11 border border-outline-variant text-outline rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Atenção -->
+<section class="mb-lg">
+<div class="flex items-center gap-base mb-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<h2 class="font-title-md text-on-background">🟡 Atenção</h2>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Card Juliana -->
+<div class="bg-surface-container-lowest p-sm rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-secondary/20 transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-sm">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="A close-up studio photograph of a young woman with dark hair tied back, wearing a bright orange sports top. She has a focused yet calm expression, set against a bright, minimalist background with natural daylight. The lighting is crisp and modern, creating an atmosphere of energy and discipline within a high-end boutique fitness studio. The color palette emphasizes clean whites and vibrant warm tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWChrWLfD0lfBG4XJrwXYd-GM6kaevafYdPoBVuHYDNsgw-eH7tIQH77RbuZP39Matvc9tHV2Bz-YgurrO38JT64Q4vhNCJnacRQfxUc4QhkTPc-ExXf6E2owol__qmMPhbQReAo3lxObPkTvgM62h2G3nXdKqefrtfL0-IP963FjavHXEiuXPJnMi1LkevlBSxC9cjgEl748ZgrcpFZQX3GNmZVKPFYMi8tdw3Xq8-5WTKnQ9GjNpxLrQ4hS11algLMUt6AP-hV29"/>
+<div>
+<h3 class="font-title-md">Juliana Mendes</h3>
+<p class="text-xs text-gray-500 font-medium">Yoga • Noite</p>
+</div>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2 py-1 rounded-lg">
+<span class="font-label-caps text-[10px]">45% PRESENÇA</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="flex-1 bg-primary text-white font-label-caps h-11 rounded-lg flex items-center justify-center gap-xs active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            Enviar mensagem
+                        </button>
+<button class="w-11 h-11 border border-outline-variant text-outline rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card Pedro -->
+<div class="bg-surface-container-lowest p-sm rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-secondary/20 transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-sm">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+<div>
+<h3 class="font-title-md">Pedro Almeida</h3>
+<p class="text-xs text-gray-500 font-medium">CrossFit • Noite</p>
+</div>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2 py-1 rounded-lg">
+<span class="font-label-caps text-[10px]">60% PRESENÇA</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="flex-1 bg-primary text-white font-label-caps h-11 rounded-lg flex items-center justify-center gap-xs active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            Enviar mensagem
+                        </button>
+<button class="w-11 h-11 border border-outline-variant text-outline rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Ativos -->
+<section class="mb-lg">
+<div class="flex items-center gap-base mb-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h2 class="font-title-md text-on-background">✅ Ativos</h2>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Card Beatriz -->
+<div class="bg-surface-container-lowest p-sm rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-transparent hover:border-primary/20 transition-all opacity-80">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex gap-sm">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">person_check</span>
+</div>
+<div>
+<h3 class="font-title-md">Beatriz Souza</h3>
+<p class="text-xs text-gray-500 font-medium">Dança • Manhã</p>
+</div>
+</div>
+<div class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-1 rounded-lg">
+<span class="font-label-caps text-[10px]">95% PRESENÇA</span>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="flex-1 bg-primary text-white font-label-caps h-11 rounded-lg flex items-center justify-center gap-xs active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+                            Enviar mensagem
+                        </button>
+<button class="w-11 h-11 border border-outline-variant text-outline rounded-lg flex items-center justify-center active:scale-95 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-white dark:bg-gray-950 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-gray-200 dark:border-gray-800">
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-[#2E7D32] transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#2E7D32] dark:text-green-400 bg-green-50/50 dark:bg-green-900/20 rounded-xl px-3 py-1 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Students</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-[#2E7D32] transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-[#2E7D32] transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Reports</span>
+</a>
+</nav>
+</body></html>

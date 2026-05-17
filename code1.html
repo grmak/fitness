@@ -1,0 +1,292 @@
+<!DOCTYPE html><html class="light" lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-container": "#2e7d32",
+                        "primary-fixed": "#a3f69c",
+                        "on-surface-variant": "#40493d",
+                        "secondary-fixed-dim": "#fabd00",
+                        "secondary-fixed": "#ffdf9e",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e2e2e2",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1f1f1",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed-dim": "#88d982",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "background": "#f9f9f9",
+                        "tertiary-container": "#d02d2d",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed": "#261a00",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "inverse-primary": "#88d982",
+                        "on-tertiary-fixed": "#410003",
+                        "surface-container-low": "#f3f3f3",
+                        "outline-variant": "#bfcaba",
+                        "on-secondary-container": "#6c5000",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5b4300",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-fixed-variant": "#005312",
+                        "secondary-container": "#fdc003",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container": "#eeeeee",
+                        "primary": "#0d631b",
+                        "surface": "#f9f9f9",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#785900",
+                        "on-tertiary-container": "#ffedeb",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#1b6d24",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#ac0c18",
+                        "on-primary-fixed": "#002204",
+                        "surface-dim": "#dadada",
+                        "outline": "#707a6c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "xs": "8px",
+                        "safe-area-margin": "16px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "kpi-display": ["Plus Jakarta Sans"],
+                        "body-reg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "kpi-display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-reg": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f9f9f9; }
+    </style>
+</head>
+<body class="text-on-background pb-24">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a boutique fitness studio owner in a bright, modern setting. The lighting is soft and flattering, highlighting a friendly and confident expression. The background is a clean, minimalist studio interior with light-colored wooden floors and white walls, maintaining a high-key, fresh aesthetic consistent with a healthy lifestyle brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1CN9PW0jvdoLT0-8Zt1O8GT6OlSMBAIjet6e3kjVzV8b8RQJe0QoyFfeAHrKgdLSjF0wtvHGC3OLlyoyds-YCyr5an3X867Jj1zTufbdW9njqXFASCGnlPhiw1tGk7RNS5_cFzFYZghBijPHyks-1RY8htKNVOAUruKlLihlTO5WNomITLtPWNpcBSajRNezERymMvEcBaaYe4wjWHX9P9GBK_uvUqlG2baaHcyTLdvC-fmt0mgmeKp_hax4qK3DN7ZBtbh_omNYT">
+</div>
+<h1 class="text-lg font-extrabold text-[#2E7D32] tracking-tight">StudioGest</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 relative active:opacity-70 duration-200 transition-colors hover:bg-gray-50 rounded-full">
+<span class="material-symbols-outlined text-gray-500" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<main class="p-4 space-y-6">
+<!-- KPI Section: Horizontal Scroll Container -->
+<section class="flex overflow-x-auto gap-4 pb-2 -mx-4 px-4 scrollbar-hide">
+<!-- KPI Card 1 -->
+<div class="min-w-[200px] flex-1 bg-white p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-[#2E7D32]">
+<p class="font-label-caps text-label-caps text-outline uppercase">Alunos ativos</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-display text-kpi-display text-on-surface">124</span>
+<span class="text-primary text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_upward">arrow_upward</span>
+</span>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="min-w-[200px] flex-1 bg-white p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-[#2E7D32]">
+<p class="font-label-caps text-label-caps text-outline uppercase">Receita</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-display text-kpi-display text-on-surface">R$ 15.400</span>
+<span class="text-primary text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_upward">arrow_upward</span>
+</span>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="min-w-[200px] flex-1 bg-white p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-error">
+<p class="font-label-caps text-label-caps text-outline uppercase">Ticket médio</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-kpi-display text-kpi-display text-on-surface">R$ 125</span>
+<span class="text-error text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_downward">arrow_downward</span>
+</span>
+</div>
+</div>
+</section>
+<!-- Proactive Alert Card -->
+<section class="bg-primary-container text-on-primary-container p-4 rounded-xl shadow-md relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="font-title-md text-title-md mb-1">Ação Reativa</h3>
+<p class="font-body-reg text-body-reg opacity-90">3 alunos não frequentam o studio há mais de 7 dias. Envie uma mensagem agora.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-7xl" data-icon="bolt">bolt</span>
+</div>
+</section>
+<!-- Students with Low Frequency -->
+<section class="space-y-3">
+<div class="flex justify-between items-center">
+<h2 class="font-title-md text-title-md text-on-surface">Alunos com baixa frequência</h2>
+<span class="text-primary font-label-caps text-xs">VER TODOS</span>
+</div>
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<!-- Student 1 -->
+<div class="flex items-center justify-between p-4 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-outline font-bold">R</div>
+<div>
+<p class="font-title-md text-[15px] text-on-surface">Ricardo Silva</p>
+<p class="text-xs text-outline">4 faltas • 10 dias sem vir</p>
+</div>
+</div>
+<button class="bg-[#2E7D32] text-white w-10 h-10 rounded-full flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="chat" style="font-variation-settings: &quot;FILL&quot; 1;">chat</span>
+</button>
+</div>
+<!-- Student 2 -->
+<div class="flex items-center justify-between p-4 border-b border-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-outline font-bold">A</div>
+<div>
+<p class="font-title-md text-[15px] text-on-surface">Ana Martins</p>
+<p class="text-xs text-outline">3 faltas • 8 dias sem vir</p>
+</div>
+</div>
+<button class="bg-[#2E7D32] text-white w-10 h-10 rounded-full flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="chat" style="font-variation-settings: &quot;FILL&quot; 1;">chat</span>
+</button>
+</div>
+<!-- Student 3 -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-outline font-bold">M</div>
+<div>
+<p class="font-title-md text-[15px] text-on-surface">Marcos Oliveira</p>
+<p class="text-xs text-outline">2 faltas • 7 dias sem vir</p>
+</div>
+</div>
+<button class="bg-[#2E7D32] text-white w-10 h-10 rounded-full flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="chat" style="font-variation-settings: &quot;FILL&quot; 1;">chat</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Schedule Occupancy -->
+<section class="space-y-3">
+<h2 class="font-title-md text-title-md text-on-surface">Ocupação dos horários – hoje</h2>
+<div class="space-y-3">
+<!-- Item 1 - Yoga -->
+<div class="bg-white p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-xs text-primary bg-green-50 px-2 py-1 rounded">08:30</span>
+<span class="font-title-md text-[15px]">Yoga</span>
+</div>
+<span class="text-xs font-bold text-primary">85%</span>
+</div>
+<div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+<div class="bg-[#2E7D32] h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- Item 2 - Pilates -->
+<div class="bg-white p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-xs text-secondary-container bg-amber-50 px-2 py-1 rounded">10:00</span>
+<span class="font-title-md text-[15px]">Pilates</span>
+</div>
+<span class="text-xs font-bold text-secondary">55%</span>
+</div>
+<div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 55%"></div>
+</div>
+</div>
+<!-- Item 3 - Funcional -->
+<div class="bg-white p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-xs text-error bg-red-50 px-2 py-1 rounded">18:30</span>
+<span class="font-title-md text-[15px]">Funcional</span>
+</div>
+<span class="text-xs font-bold text-error">30%</span>
+</div>
+<div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 30%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Anchor/Hero (Decorative) -->
+<section class="mt-8">
+<div class="relative w-full h-40 rounded-2xl overflow-hidden shadow-lg">
+<img alt="Studio" class="w-full h-full object-cover" data-alt="A serene, high-end boutique fitness studio at golden hour. The space features floor-to-ceiling windows, premium yoga equipment neatly arranged, and soft natural light reflecting off polished wooden floors. The atmosphere is peaceful and professional, embodying a luxury wellness experience with a clean, light-mode visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWChrWLfD0lfBG4XJrwXYd-GM6kaevafYdPoBVuHYDNsgw-eH7tIQH77RbuZP39Matvc9tHV2Bz-YgurrO38JT64Q4vhNCJnacRQfxUc4QhkTPc-ExXf6E2owol__qmMPhbQReAo3lxObPkTvgM62h2G3nXdKqefrtfL0-IP963FjavHXEiuXPJnMi1LkevlBSxC9cjgEl748ZgrcpFZQX3GNmZVKPFYMi8tdw3Xq8-5WTKnQ9GjNpxLrQ4hS11algLMUt6AP-hV29">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+<p class="text-white font-title-md">Gestão sem esforço</p>
+<p class="text-white/80 text-xs">Acompanhe seu progresso em tempo real.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-[#2E7D32] bg-green-50/50 rounded-xl px-3 py-1 active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" style="font-variation-settings: &quot;FILL&quot; 1;">home</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Home</span>
+</a>
+<!-- Students -->
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-[#2E7D32] active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="group">group</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Students</span>
+</a>
+<!-- Schedule -->
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-[#2E7D32] active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Schedule</span>
+</a>
+<!-- Reports -->
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-[#2E7D32] active:scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="analytics">analytics</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Reports</span>
+</a>
+</nav>
+
+
+</body></html>

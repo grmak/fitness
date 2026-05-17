@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "primary-container": "#2e7d32",
+                        "primary-fixed": "#a3f69c",
+                        "on-surface-variant": "#40493d",
+                        "secondary-fixed-dim": "#fabd00",
+                        "secondary-fixed": "#ffdf9e",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e2e2e2",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1f1f1",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed-dim": "#88d982",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "background": "#f9f9f9",
+                        "tertiary-container": "#d02d2d",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed": "#261a00",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "inverse-primary": "#88d982",
+                        "on-tertiary-fixed": "#410003",
+                        "surface-container-low": "#f3f3f3",
+                        "outline-variant": "#bfcaba",
+                        "on-secondary-container": "#6c5000",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#5b4300",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-fixed-variant": "#005312",
+                        "secondary-container": "#fdc003",
+                        "on-primary-container": "#cbffc2",
+                        "surface-container": "#eeeeee",
+                        "primary": "#0d631b",
+                        "surface": "#f9f9f9",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#785900",
+                        "on-tertiary-container": "#ffedeb",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-background": "#1a1c1c",
+                        "surface-tint": "#1b6d24",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#ac0c18",
+                        "on-primary-fixed": "#002204",
+                        "surface-dim": "#dadada",
+                        "outline": "#707a6c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "xs": "8px",
+                        "safe-area-margin": "16px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "kpi-display": ["Plus Jakarta Sans"],
+                        "body-reg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "kpi-display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-reg": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f9f9f9; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="text-on-background pb-24">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+<div class="flex items-center gap-3">
+<button class="active:opacity-70 duration-200">
+<span class="material-symbols-outlined text-gray-500">arrow_back</span>
+</button>
+<h1 class="text-lg font-extrabold text-[#2E7D32] tracking-tight">Ricardo Silva</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="active:opacity-70 duration-200">
+<span class="material-symbols-outlined text-gray-500">more_vert</span>
+</button>
+</div>
+</header>
+<main class="px-safe-area-margin mt-md space-y-md">
+<!-- Profile Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-sm shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/30 overflow-hidden">
+<div class="flex items-center gap-md mb-sm">
+<div class="relative">
+<img alt="Profile" class="w-16 h-16 rounded-full object-cover" data-alt="A professional studio portrait of a fit middle-aged man with short dark hair and a warm, friendly expression, wearing a minimalist athletic shirt. The lighting is soft and natural, coming from the side to create gentle highlights. The background is a clean, neutral studio wall, echoing a high-end boutique fitness environment. The overall aesthetic is professional, clear, and corporate-modern with a focus on personal health." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1CN9PW0jvdoLT0-8Zt1O8GT6OlSMBAIjet6e3kjVzV8b8RQJe0QoyFfeAHrKgdLSjF0wtvHGC3OLlyoyds-YCyr5an3X867Jj1zTufbdW9njqXFASCGnlPhiw1tGk7RNS5_cFzFYZghBijPHyks-1RY8htKNVOAUruKlLihlTO5WNomITLtPWNpcBSajRNezERymMvEcBaaYe4wjWHX9P9GBK_uvUqlG2baaHcyTLdvC-fmt0mgmeKp_hax4qK3DN7ZBtbh_omNYT"/>
+<div class="absolute bottom-0 right-0 bg-primary w-4 h-4 rounded-full border-2 border-white"></div>
+</div>
+<div>
+<h2 class="font-title-md text-on-surface">Ricardo Silva</h2>
+<p class="font-body-reg text-outline">Aluno desde Jan 2024</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm pt-sm border-t border-surface-container">
+<div>
+<span class="font-label-caps text-outline block uppercase">Plano</span>
+<span class="font-title-md text-on-surface">Plano Mensal</span>
+</div>
+<div>
+<span class="font-label-caps text-outline block uppercase">Última Aula</span>
+<span class="font-title-md text-tertiary">há 10 dias</span>
+</div>
+<div class="col-span-2">
+<span class="font-label-caps text-outline block uppercase">Início</span>
+<span class="font-body-reg text-on-surface">10/01/2024</span>
+</div>
+</div>
+</section>
+<!-- Alert Block (Critical Attention) -->
+<section class="bg-secondary-fixed rounded-xl p-sm border-l-4 border-secondary shadow-sm">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div>
+<p class="font-title-md text-on-secondary-fixed leading-tight">ALERTA: 4 faltas consecutivas</p>
+<p class="font-body-reg text-on-secondary-fixed-variant mt-1">O aluno está há 10 dias sem comparecer ao estúdio.</p>
+</div>
+</div>
+<div class="flex justify-between mt-sm bg-white/40 p-sm rounded-lg border border-secondary/20">
+<div class="text-center">
+<p class="font-label-caps text-on-secondary-fixed-variant">Faltas no mês</p>
+<p class="font-kpi-display text-secondary leading-none mt-1">4</p>
+</div>
+<div class="w-px bg-secondary/20"></div>
+<div class="text-center">
+<p class="font-label-caps text-on-secondary-fixed-variant">Presença</p>
+<p class="font-kpi-display text-secondary leading-none mt-1">25%</p>
+</div>
+</div>
+</section>
+<!-- Presence Chart (Horizontal Bars) -->
+<section class="bg-surface-container-lowest rounded-xl p-sm shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<h3 class="font-title-md text-on-surface mb-md">Presença últimas 4 semanas</h3>
+<div class="space-y-sm">
+<!-- Week 4 -->
+<div class="space-y-1">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-outline">SEM 04 (ATUAL)</span>
+<span class="font-label-caps text-tertiary">0%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-0 rounded-full"></div>
+</div>
+</div>
+<!-- Week 3 -->
+<div class="space-y-1">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-outline">SEM 03</span>
+<span class="font-label-caps text-tertiary">0%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-0 rounded-full"></div>
+</div>
+</div>
+<!-- Week 2 -->
+<div class="space-y-1">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-outline">SEM 02</span>
+<span class="font-label-caps text-primary">60%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%] rounded-full"></div>
+</div>
+</div>
+<!-- Week 1 -->
+<div class="space-y-1">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-outline">SEM 01</span>
+<span class="font-label-caps text-primary">100%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recommended Actions -->
+<section class="space-y-sm">
+<h3 class="font-label-caps text-outline uppercase tracking-widest px-1">Ações Recomendadas</h3>
+<button class="w-full h-14 bg-[#25D366] text-white flex items-center justify-center gap-3 rounded-xl font-title-md shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined">chat</span>
+                Enviar mensagem de incentivo
+            </button>
+<button class="w-full h-14 bg-white border border-outline-variant text-on-surface flex items-center justify-center gap-3 rounded-xl font-title-md shadow-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+                Oferecer remanejamento
+            </button>
+<button class="w-full h-14 bg-error-container text-on-error-container flex items-center justify-center gap-3 rounded-xl font-title-md border border-error/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">flag</span>
+                Marcar como caso crítico
+            </button>
+</section>
+<!-- Background Decor (Bento-like visual) -->
+<div class="grid grid-cols-2 gap-sm opacity-60">
+<div class="h-32 rounded-xl overflow-hidden grayscale contrast-125">
+<img alt="Studio" class="w-full h-full object-cover" data-alt="A high-angle, wide shot of a modern boutique pilates studio with clean lines, light wood floors, and large windows filling the space with soft daylight. The atmosphere is peaceful and orderly, with minimalist workout equipment arranged symmetrically. The color palette is composed of soft whites, light grays, and natural wood tones, emphasizing a professional and disciplined environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWChrWLfD0lfBG4XJrwXYd-GM6kaevafYdPoBVuHYDNsgw-eH7tIQH77RbuZP39Matvc9tHV2Bz-YgurrO38JT64Q4vhNCJnacRQfxUc4QhkTPc-ExXf6E2owol__qmMPhbQReAo3lxObPkTvgM62h2G3nXdKqefrtfL0-IP963FjavHXEiuXPJnMi1LkevlBSxC9cjgEl748ZgrcpFZQX3GNmZVKPFYMi8tdw3Xq8-5WTKnQ9GjNpxLrQ4hS11algLMUt6AP-hV29"/>
+</div>
+<div class="h-32 bg-primary/5 rounded-xl border border-primary/10 flex flex-col items-center justify-center p-sm text-center">
+<span class="material-symbols-outlined text-primary text-3xl mb-1">loyalty</span>
+<p class="font-label-caps text-primary">Score de Retenção</p>
+<p class="font-title-md text-primary">Baixo</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-gray-400" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#2E7D32] bg-green-50/50 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Students</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[11px] font-medium">Reports</span>
+</a>
+</nav>
+</body></html>
