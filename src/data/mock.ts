@@ -1,5 +1,5 @@
 /**
- * Tipos e dados mockados da aplicação StudioGest (sem backend).
+ * Tipos e dados mockados da aplicação CopilotFit (sem backend).
  * @module data/mock
  */
 
@@ -125,20 +125,63 @@ export interface WeeklyRevenuePoint {
   value: number;
 }
 
+/** Tipo de despesa operacional. */
+export type ExpenseType = "fixa" | "variavel" | "esporadica";
+
+/** Categoria de despesa do studio. */
+export interface ExpenseCategory {
+  id: string;
+  name: string;
+  type: ExpenseType;
+}
+
+/** Lançamento de despesa. */
+export interface Expense {
+  id: string;
+  date: string;
+  categoryId: string;
+  description: string;
+  amount: number;
+  paid: boolean;
+  recurrence?: "mensal" | "unica";
+}
+
+/** Ponto mensal com receita e despesa. */
+export interface MonthlyFinancialPoint {
+  label: string;
+  revenue: number;
+  expense: number;
+}
+
+/** Total de despesa por categoria no período. */
+export interface ExpenseCategoryTotal {
+  categoryId: string;
+  categoryName: string;
+  amount: number;
+  type: ExpenseType;
+}
+
+/** Resumo agregado de despesas do mês. */
+export interface ExpenseSummary {
+  total: number;
+  fixedPct: number;
+  variablePct: number;
+  topCategory: string;
+  margin: number;
+  marginPct: number;
+}
+
 /** Configuração visual do estúdio (marca). */
 export interface StudioBranding {
   appName: string;
-  ownerAvatarUrl: string;
   heroImageUrl: string;
   heroTitle: string;
   heroSubtitle: string;
 }
 
+/** Imagem de academia para hero e banners. */
 const STUDIO_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAWChrWLfD0lfBG4XJrwXYd-GM6kaevafYdPoBVuHYDNsgw-eH7tIQH77RbuZP39Matvc9tHV2Bz-YgurrO38JT64Q4vhNCJnacRQfxUc4QhkTPc-ExXf6E2owol__qmMPhbQReAo3lxObPkTvgM62h2G3nXdKqefrtfL0-IP963FjavHXEiuXPJnMi1LkevlBSxC9cjgEl748ZgrcpFZQX3GNmZVKPFYMi8tdw3Xq8-5WTKnQ9GjNpxLrQ4hS11algLMUt6AP-hV29";
-
-const OWNER_AVATAR =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuC1CN9PW0jvdoLT0-8Zt1O8GT6OlSMBAIjet6e3kjVzV8b8RQJe0QoyFfeAHrKgdLSjF0wtvHGC3OLlyoyds-YCyr5an3X867Jj1zTufbdW9njqXFASCGnlPhiw1tGk7RNS5_cFzFYZghBijPHyks-1RY8htKNVOAUruKlLihlTO5WNomITLtPWNpcBSajRNezERymMvEcBaaYe4wjWHX9P9GBK_uvUqlG2baaHcyTLdvC-fmt0mgmeKp_hax4qK3DN7ZBtbh_omNYT";
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80";
 
 /** Lista fixa de alunos (fonte única para telas). */
 export const MOCK_STUDENTS: Student[] = [
@@ -146,7 +189,7 @@ export const MOCK_STUDENTS: Student[] = [
     id: "ricardo-silva",
     name: "Ricardo Silva",
     initials: "R",
-    avatarUrl: OWNER_AVATAR,
+    avatarUrl: null,
     modality: "Musculação",
     shift: "Manhã",
     planType: "Mensal",
@@ -233,7 +276,7 @@ export const MOCK_STUDENTS: Student[] = [
     id: "carlos-silva",
     name: "Carlos Silva",
     initials: "C",
-    avatarUrl: OWNER_AVATAR,
+    avatarUrl: null,
     modality: "Musculação",
     shift: "Manhã",
     planType: "Anual",
@@ -291,7 +334,7 @@ export const MOCK_STUDENTS: Student[] = [
     id: "juliana-mendes",
     name: "Juliana Mendes",
     initials: "J",
-    avatarUrl: STUDIO_IMAGE,
+    avatarUrl: null,
     modality: "Yoga",
     shift: "Noite",
     planType: "Mensal",
@@ -448,11 +491,10 @@ export const MOCK_CLASSES_TODAY: ClassSlot[] = [
 
 /** Marca e mídias do app. */
 export const MOCK_BRANDING: StudioBranding = {
-  appName: "StudioGest",
-  ownerAvatarUrl: OWNER_AVATAR,
+  appName: "CopilotFit",
   heroImageUrl: STUDIO_IMAGE,
   heroTitle: "Gestão sem esforço",
-  heroSubtitle: "Acompanhe seu progresso em tempo real.",
+  heroSubtitle: "Copiloto inteligente para o seu studio fitness.",
 };
 
 /** Agenda mock com ocupação e insights. */
@@ -473,12 +515,124 @@ export const MOCK_SCHEDULE_ITEMS: ScheduleItem[] = [
   },
 ];
 
+/** Categorias de despesa de um pequeno studio fitness. */
+export const MOCK_EXPENSE_CATEGORIES: ExpenseCategory[] = [
+  { id: "aluguel", name: "Aluguel", type: "fixa" },
+  { id: "salarios", name: "Salários e honorários", type: "fixa" },
+  { id: "energia", name: "Energia elétrica", type: "variavel" },
+  { id: "agua", name: "Água", type: "variavel" },
+  { id: "internet", name: "Internet e telefonia", type: "fixa" },
+  { id: "marketing", name: "Marketing", type: "variavel" },
+  { id: "manutencao", name: "Manutenção e reparos", type: "variavel" },
+  { id: "limpeza", name: "Limpeza e higiene", type: "variavel" },
+  { id: "software", name: "Software e assinaturas", type: "fixa" },
+  { id: "taxas", name: "Taxas de pagamento", type: "variavel" },
+  { id: "contador", name: "Contador e serviços profissionais", type: "fixa" },
+  { id: "impostos", name: "Impostos e taxas", type: "fixa" },
+];
+
+/** Receita e despesa — últimos 6 meses. */
+export const MOCK_FINANCIAL_MONTHS: MonthlyFinancialPoint[] = [
+  { label: "Dez", revenue: 42000, expense: 36500 },
+  { label: "Jan", revenue: 43500, expense: 37200 },
+  { label: "Fev", revenue: 44800, expense: 37800 },
+  { label: "Mar", revenue: 46200, expense: 38500 },
+  { label: "Abr", revenue: 47100, expense: 39200 },
+  { label: "Mai", revenue: 48200, expense: 39800 },
+];
+
+/** Despesas do mês corrente (maio) por categoria. */
+export const MOCK_EXPENSES_BY_CATEGORY: ExpenseCategoryTotal[] = [
+  { categoryId: "salarios", categoryName: "Salários e honorários", amount: 25300, type: "fixa" },
+  { categoryId: "aluguel", categoryName: "Aluguel", amount: 5500, type: "fixa" },
+  { categoryId: "impostos", categoryName: "Impostos e taxas", amount: 1870, type: "fixa" },
+  { categoryId: "taxas", categoryName: "Taxas de pagamento", amount: 1350, type: "variavel" },
+  { categoryId: "energia", categoryName: "Energia elétrica", amount: 1350, type: "variavel" },
+  { categoryId: "marketing", categoryName: "Marketing", amount: 2000, type: "variavel" },
+  { categoryId: "limpeza", categoryName: "Limpeza e higiene", amount: 700, type: "variavel" },
+  { categoryId: "software", categoryName: "Software e assinaturas", amount: 550, type: "fixa" },
+  { categoryId: "manutencao", categoryName: "Manutenção e reparos", amount: 500, type: "variavel" },
+  { categoryId: "contador", categoryName: "Contador e serviços profissionais", amount: 400, type: "fixa" },
+  { categoryId: "agua", categoryName: "Água", amount: 300, type: "variavel" },
+  { categoryId: "internet", categoryName: "Internet e telefonia", amount: 180, type: "fixa" },
+];
+
+/** Lançamentos de despesa (amostra do mês). */
+export const MOCK_EXPENSES: Expense[] = [
+  {
+    id: "e1",
+    date: "2025-05-01",
+    categoryId: "aluguel",
+    description: "Aluguel maio — sala principal",
+    amount: 5500,
+    paid: true,
+    recurrence: "mensal",
+  },
+  {
+    id: "e2",
+    date: "2025-05-05",
+    categoryId: "salarios",
+    description: "Honorários professores (4 modalidades)",
+    amount: 9800,
+    paid: true,
+    recurrence: "mensal",
+  },
+  {
+    id: "e3",
+    date: "2025-05-10",
+    categoryId: "energia",
+    description: "Conta de luz — maio",
+    amount: 1350,
+    paid: true,
+    recurrence: "mensal",
+  },
+  {
+    id: "e4",
+    date: "2025-04-18",
+    categoryId: "manutencao",
+    description: "Revisão esteira e bikes",
+    amount: 2000,
+    paid: true,
+    recurrence: "unica",
+  },
+];
+
 /** Resumo financeiro dos relatórios. */
 export const MOCK_REPORT_FINANCIAL = {
   revenue: { value: "R$ 48.200", changePct: 8 },
+  expenses: { value: "R$ 39.800", changePct: 3.2 },
+  margin: { value: "R$ 8.400", changePct: -2.1 },
   ticket: { value: "R$ 128", changePct: -1.2 },
   cancellations: { value: "3", note: "1 pendente de retorno" },
 };
+
+/** Insights financeiros (despesas e margem). */
+export const MOCK_FINANCIAL_INSIGHTS: AutoInsight[] = [
+  {
+    id: "f1",
+    icon: "pie_chart",
+    text: "Aluguel + folha representam 68% das despesas do mês.",
+    tone: "warning",
+  },
+  {
+    id: "f2",
+    icon: "savings",
+    text: "Margem líquida de 17,4% — abaixo da meta de 22%.",
+    tone: "danger",
+  },
+  {
+    id: "f3",
+    icon: "campaign",
+    text: "Despesas com marketing subiram 12% vs mês anterior.",
+    tone: "warning",
+  },
+  {
+    id: "f4",
+    icon: "bolt",
+    text: "Energia elétrica 8% acima da média dos últimos 3 meses.",
+    tone: "info",
+  },
+];
 
 /** Novos vs cancelamentos (últimos meses). */
 export const MOCK_ENROLLMENT_MONTHS = [
@@ -511,6 +665,7 @@ export const MOCK_MODALITY_SEGMENTS: ModalitySegment[] = [
 export const MOCK_GOALS: GoalMetric[] = [
   { id: "new-students", label: "Novos alunos", target: 20, actual: 18, unit: "" },
   { id: "revenue", label: "Receita (R$ mil)", target: 50, actual: 48.2, unit: "k" },
+  { id: "margin", label: "Margem líquida", target: 22, actual: 17.4, unit: "%" },
   { id: "retention", label: "Retenção", target: 90, actual: 84, unit: "%" },
 ];
 
@@ -705,4 +860,60 @@ export function getStudentRecommendations(student: Student): StudentRecommendati
   }
 
   return recs;
+}
+
+/**
+ * Formata valor numérico em reais para exibição (pt-BR).
+ *
+ * @param value - Valor em reais.
+ * @param compact - Se true, usa formato abreviado (ex.: 48,2k).
+ * @returns String formatada.
+ */
+export function formatBRL(value: number, compact = false): string {
+  if (compact && value >= 1000) {
+    const k = value / 1000;
+    const str = k % 1 === 0 ? k.toFixed(0) : k.toFixed(1).replace(".", ",");
+    return `R$ ${str}k`;
+  }
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+}
+
+/**
+ * Calcula resumo de despesas e margem do último mês mockado.
+ *
+ * @returns Totais, percentuais e categoria principal.
+ */
+export function getExpenseSummary(): ExpenseSummary {
+  const last = MOCK_FINANCIAL_MONTHS[MOCK_FINANCIAL_MONTHS.length - 1];
+  const total = MOCK_EXPENSES_BY_CATEGORY.reduce((s, c) => s + c.amount, 0);
+  const fixed = MOCK_EXPENSES_BY_CATEGORY.filter((c) => c.type === "fixa").reduce((s, c) => s + c.amount, 0);
+  const top = [...MOCK_EXPENSES_BY_CATEGORY].sort((a, b) => b.amount - a.amount)[0];
+  const margin = last.revenue - last.expense;
+  const marginPct = last.revenue > 0 ? (margin / last.revenue) * 100 : 0;
+  return {
+    total,
+    fixedPct: total > 0 ? Math.round((fixed / total) * 100) : 0,
+    variablePct: total > 0 ? Math.round(((total - fixed) / total) * 100) : 0,
+    topCategory: top?.categoryName ?? "—",
+    margin,
+    marginPct: Math.round(marginPct * 10) / 10,
+  };
+}
+
+/**
+ * Retorna despesas agrupadas por categoria (ordenadas por valor).
+ *
+ * @returns Lista para gráficos de barras.
+ */
+export function getExpensesByCategory(): ExpenseCategoryTotal[] {
+  return [...MOCK_EXPENSES_BY_CATEGORY].sort((a, b) => b.amount - a.amount);
+}
+
+/**
+ * Une insights operacionais e financeiros para a página de relatórios.
+ *
+ * @returns Lista combinada de insights.
+ */
+export function getAllReportInsights(): AutoInsight[] {
+  return [...MOCK_FINANCIAL_INSIGHTS, ...MOCK_REPORT_INSIGHTS];
 }

@@ -1,15 +1,23 @@
-# Resumo técnico do projeto StudioGest
+# Resumo técnico do projeto CopilotFit
 
 ## Objetivo
 
-SPA para o **perfil do proprietário** de uma academia pequena (“StudioGest”): dashboard, alunos segmentados por risco, detalhe do aluno, agenda e relatórios — **tudo com dados mock** em TypeScript, **sem backend nem base de dados**.
+SPA para o **perfil do proprietário** de uma academia pequena (“CopilotFit”): dashboard estratégico, alunos segmentados por risco, detalhe do aluno, agenda, relatórios com **receitas e despesas** — **tudo com dados mock** em TypeScript, **sem backend nem base de dados**.
 
 ## Stack
 
-- **Vite 5** — bundler e servidor de desenvolvimento
+- **Vite 7** — bundler e servidor de desenvolvimento
 - **React 18** + **TypeScript** — UI e tipagem
-- **React Router 6** — rotas e navegação (`/`, `/alunos`, `/alunos/:id`, `/agenda`, `/relatorios`)
+- **React Router 6** — rotas e navegação (`/`, `/alunos`, `/alunos/:id`, `/agenda`, `/relatorios`, `/sobre`)
 - **Tailwind CSS 3** — estilos; tema alinhado aos protótipos HTML (`code1/2/3.html`) e tokens do design system
+
+## Deploy
+
+- **GitHub Pages:** https://grmak.github.io/fitness/
+- **Repositório:** https://github.com/grmak/fitness
+- `vite.config.ts` — `base: "/fitness/"`
+- `src/App.tsx` — `BrowserRouter basename="/fitness"`
+- Workflow `.github/workflows/deploy-pages.yml` (build + deploy via GitHub Actions)
 
 ## Estrutura relevante
 
@@ -17,9 +25,15 @@ SPA para o **perfil do proprietário** de uma academia pequena (“StudioGest”
 - `src/App.tsx` — `BrowserRouter` e definição de rotas dentro de `AppLayout`
 - `src/layouts/AppLayout.tsx` — área de conteúdo (`Outlet`) + shell mobile (`max-w-lg`)
 - `src/components/BottomNav.tsx` — barra inferior com `NavLink` (estado ativo por rota)
-- `src/pages/*` — `HomePage`, `StudentsPage`, `StudentDetailPage`, `AgendaPage`, `RelatoriosPage`
-- `src/data/mock.ts` — tipos (`Student`, `Kpi`, etc.), arrays mock e helpers (`getStudentById`, `getStudentsByRisk`, …)
+- `src/pages/*` — `HomePage`, `StudentsPage`, `StudentDetailPage`, `AgendaPage`, `RelatoriosPage`, `SobrePage`
+- `src/data/mock.ts` — tipos (`Student`, `Kpi`, `Expense`, etc.), arrays mock e helpers (`getStudentById`, `getExpenseSummary`, …)
 - `tailwind.config.js` / `postcss.config.js` / `src/index.css` — tema e utilitários (ex.: ícones Material Symbols via Google Fonts no `index.html`)
+
+## Relatórios e despesas
+
+- `MOCK_FINANCIAL_MONTHS`, `MOCK_EXPENSES_BY_CATEGORY`, insights financeiros
+- `DualLineChart` — receita (verde) e despesa (vermelho)
+- Resumo Receita / Despesas / Margem na `RelatoriosPage`
 
 ## Artefactos legados
 
@@ -27,7 +41,7 @@ Referência visual; **não** são o entrypoint da SPA: `code1.html`, `code2.html
 
 ## Build de produção
 
-`npm run build` gera `dist/` (assets estáticos servidos por qualquer host estático ou `vite preview`).
+`npm run build` gera `dist/` (assets estáticos para GitHub Pages ou `vite preview`).
 
 ## Rede / proxy
 
@@ -55,3 +69,5 @@ npm install
 npm run build
 npm run preview
 ```
+
+Para testar com o mesmo `base` do GitHub Pages, use `npm run preview` após o build (servido em `/fitness/` conforme `vite.config.ts`).

@@ -26,8 +26,8 @@ export function HomePage(): JSX.Element {
     <>
       <header className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-gray-100 bg-white/80 px-4 shadow-sm backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 overflow-hidden rounded-full bg-surface-container">
-            <img src={MOCK_BRANDING.ownerAvatarUrl} alt="Perfil do proprietário" className="h-full w-full object-cover" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-on-primary">
+            CF
           </div>
           <h1 className="text-lg font-extrabold tracking-tight text-[#2E7D32]">{MOCK_BRANDING.appName}</h1>
         </div>

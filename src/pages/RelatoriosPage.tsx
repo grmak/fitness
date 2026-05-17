@@ -1,22 +1,33 @@
 import { BarChart } from "../components/charts/BarChart";
-import { SimpleLineChart } from "../components/charts/SimpleLineChart";
+import { DualLineChart } from "../components/charts/DualLineChart";
 import { InsightCard } from "../components/InsightCard";
 import {
   MOCK_ENROLLMENT_MONTHS,
+  MOCK_FINANCIAL_MONTHS,
   MOCK_GOALS,
   MOCK_MODALITY_SEGMENTS,
   MOCK_REPORT_FINANCIAL,
-  MOCK_REPORT_INSIGHTS,
   MOCK_RETENTION_METRICS,
-  MOCK_REVENUE_WEEKS,
+  formatBRL,
+  getAllReportInsights,
+  getExpenseSummary,
+  getExpensesByCategory,
 } from "../data/mock";
 
 /**
- * Relatórios estratégicos: financeiro, retenção, segmentação e metas.
+ * Relatórios estratégicos: financeiro, despesas, retenção e metas.
  *
  * @returns Página de relatórios.
  */
 export function RelatoriosPage(): JSX.Element {
+  const expenseSummary = getExpenseSummary();
+  const expenseBars = getExpensesByCategory().map((c) => ({
+    id: c.categoryId,
+    label: c.categoryName.length > 18 ? `${c.categoryName.slice(0, 16)}…` : c.categoryName,
+    value: c.amount,
+    barClass: c.type === "fixa" ? "bg-secondary-container" : "bg-error/80",
+  }));
+
   const enrollmentBars = MOCK_ENROLLMENT_MONTHS.flatMap((m) => [
     { id: `${m.label}-new`, label: `${m.label} novos`, value: m.newStudents, barClass: "bg-primary" },
     { id: `${m.label}-cancel`, label: `${m.label} cancel.`, value: m.cancellations, barClass: "bg-error" },
@@ -29,6 +40,8 @@ export function RelatoriosPage(): JSX.Element {
     barClass: m.alert ? "bg-error" : "bg-primary",
   }));
 
+  const lastMonth = MOCK_FINANCIAL_MONTHS[MOCK_FINANCIAL_MONTHS.length - 1];
+
   return (
     <>
       <header className="sticky top-0 z-40 flex h-14 items-center border-b border-gray-100 bg-white/80 px-4 shadow-sm backdrop-blur-md">
@@ -36,36 +49,71 @@ export function RelatoriosPage(): JSX.Element {
       </header>
 
       <main className="space-y-6 p-4 pb-24">
-        {/* 1. Resumo financeiro */}
         <section>
           <h2 className="mb-3 text-title-md font-title-md">Resumo financeiro</h2>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <div className="rounded-xl bg-white p-3 shadow-sm">
               <p className="text-[10px] font-label-caps uppercase text-outline">Receita</p>
               <p className="text-lg font-bold">{MOCK_REPORT_FINANCIAL.revenue.value}</p>
               <p className="text-xs font-bold text-primary">+{MOCK_REPORT_FINANCIAL.revenue.changePct}%</p>
             </div>
             <div className="rounded-xl bg-white p-3 shadow-sm">
+              <p className="text-[10px] font-label-caps uppercase text-outline">Despesas</p>
+              <p className="text-lg font-bold">{MOCK_REPORT_FINANCIAL.expenses.value}</p>
+              <p className="text-xs font-bold text-error">+{MOCK_REPORT_FINANCIAL.expenses.changePct}%</p>
+            </div>
+            <div className="rounded-xl bg-white p-3 shadow-sm">
+              <p className="text-[10px] font-label-caps uppercase text-outline">Margem líquida</p>
+              <p className="text-lg font-bold text-primary">{MOCK_REPORT_FINANCIAL.margin.value}</p>
+              <p className="text-xs font-bold text-error">{MOCK_REPORT_FINANCIAL.margin.changePct}%</p>
+            </div>
+            <div className="rounded-xl bg-white p-3 shadow-sm">
               <p className="text-[10px] font-label-caps uppercase text-outline">Ticket médio</p>
               <p className="text-lg font-bold">{MOCK_REPORT_FINANCIAL.ticket.value}</p>
               <p className="text-xs font-bold text-error">{MOCK_REPORT_FINANCIAL.ticket.changePct}%</p>
             </div>
-            <div className="rounded-xl bg-white p-3 shadow-sm">
-              <p className="text-[10px] font-label-caps uppercase text-outline">Cancelamentos</p>
-              <p className="text-lg font-bold">{MOCK_REPORT_FINANCIAL.cancellations.value}</p>
-              <p className="text-xs text-outline">{MOCK_REPORT_FINANCIAL.cancellations.note}</p>
-            </div>
           </div>
+          <p className="mt-2 text-xs text-outline">
+            Despesas fixas: {expenseSummary.fixedPct}% • variáveis: {expenseSummary.variablePct}%
+          </p>
         </section>
 
-        {/* 2. Gráficos principais */}
         <section className="rounded-xl bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-title-md font-title-md">Evolução da receita</h2>
-          <SimpleLineChart
-            labels={MOCK_REVENUE_WEEKS.map((w) => w.label)}
-            values={MOCK_REVENUE_WEEKS.map((w) => w.value)}
+          <h2 className="mb-1 text-title-md font-title-md">Receita vs despesas</h2>
+          <p className="mb-3 text-xs text-outline">Últimos 6 meses</p>
+          <DualLineChart
+            labels={MOCK_FINANCIAL_MONTHS.map((m) => m.label)}
+            series={[
+              {
+                id: "revenue",
+                label: "Receita",
+                values: MOCK_FINANCIAL_MONTHS.map((m) => m.revenue),
+                strokeColor: "#2E7D32",
+                fillColor: "#2E7D32",
+              },
+              {
+                id: "expense",
+                label: "Despesas",
+                values: MOCK_FINANCIAL_MONTHS.map((m) => m.expense),
+                strokeColor: "#ba1a1a",
+                fillColor: "#ba1a1a",
+              },
+            ]}
             valuePrefix="R$ "
           />
+          <p className="mt-3 rounded-lg bg-surface-container-low px-3 py-2 text-center text-sm">
+            Margem em {lastMonth.label}:{" "}
+            <span className="font-bold text-primary">{formatBRL(expenseSummary.margin)}</span>
+            <span className="text-outline"> ({expenseSummary.marginPct}%)</span>
+          </p>
+        </section>
+
+        <section className="rounded-xl bg-white p-4 shadow-sm">
+          <h2 className="mb-1 text-title-md font-title-md">Despesas por categoria</h2>
+          <p className="mb-3 text-xs text-outline">
+            Total: {formatBRL(expenseSummary.total)} • maior: {expenseSummary.topCategory}
+          </p>
+          <BarChart items={expenseBars} valuePrefix="R$ " valueSuffix="" />
         </section>
 
         <section className="rounded-xl bg-white p-4 shadow-sm">
@@ -79,7 +127,6 @@ export function RelatoriosPage(): JSX.Element {
           <BarChart items={enrollmentBars.slice(-6)} />
         </section>
 
-        {/* 3. Retenção */}
         <section>
           <h2 className="mb-3 text-title-md font-title-md">Retenção</h2>
           <div className="grid grid-cols-2 gap-2">
@@ -102,15 +149,13 @@ export function RelatoriosPage(): JSX.Element {
           </div>
         </section>
 
-        {/* 4. Insights */}
         <section className="space-y-2">
           <h2 className="text-title-md font-title-md">Insights automáticos</h2>
-          {MOCK_REPORT_INSIGHTS.map((i) => (
+          {getAllReportInsights().map((i) => (
             <InsightCard key={i.id} icon={i.icon} text={i.text} tone={i.tone} />
           ))}
         </section>
 
-        {/* 5. Segmentação */}
         <section className="rounded-xl bg-white p-4 shadow-sm">
           <h2 className="mb-3 text-title-md font-title-md">Por modalidade</h2>
           <BarChart items={modalityBars} valueSuffix="%" />
@@ -124,7 +169,6 @@ export function RelatoriosPage(): JSX.Element {
           </ul>
         </section>
 
-        {/* 6. Metas */}
         <section>
           <h2 className="mb-3 text-title-md font-title-md">Metas vs realizado</h2>
           <div className="space-y-3">

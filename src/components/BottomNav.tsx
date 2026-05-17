@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-type NavKey = "home" | "alunos" | "agenda" | "relatorios";
+type NavKey = "home" | "alunos" | "agenda" | "relatorios" | "sobre";
 
 interface NavItem {
   key: NavKey;
@@ -15,6 +15,7 @@ const ITEMS: NavItem[] = [
   { key: "alunos", to: "/alunos", label: "Alunos", icon: "group" },
   { key: "agenda", to: "/agenda", label: "Agenda", icon: "calendar_today" },
   { key: "relatorios", to: "/relatorios", label: "Relatórios", icon: "analytics" },
+  { key: "sobre", to: "/sobre", label: "Sobre", icon: "info" },
 ];
 
 /**

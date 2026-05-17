@@ -7,6 +7,8 @@ export interface BarChartItem {
 
 interface BarChartProps {
   items: BarChartItem[];
+  /** Prefixo exibido antes do valor (ex.: R$). */
+  valuePrefix?: string;
   /** Sufixo exibido após o valor (ex.: %). */
   valueSuffix?: string;
 }
@@ -17,7 +19,7 @@ interface BarChartProps {
  * @param props - Itens e sufixo opcional.
  * @returns Lista de barras proporcionais.
  */
-export function BarChart({ items, valueSuffix = "" }: BarChartProps): JSX.Element {
+export function BarChart({ items, valuePrefix = "", valueSuffix = "" }: BarChartProps): JSX.Element {
   const max = Math.max(...items.map((i) => i.value), 1);
 
   return (
@@ -27,7 +29,8 @@ export function BarChart({ items, valueSuffix = "" }: BarChartProps): JSX.Elemen
           <div className="mb-1 flex justify-between text-xs">
             <span className="font-medium text-on-surface">{item.label}</span>
             <span className="font-bold text-outline">
-              {item.value}
+              {valuePrefix}
+              {item.value.toLocaleString("pt-BR")}
               {valueSuffix}
             </span>
           </div>

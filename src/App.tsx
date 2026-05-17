@@ -4,6 +4,7 @@ import { AgendaPage } from "./pages/AgendaPage";
 import { HomePage } from "./pages/HomePage";
 import { RelatoriosPage } from "./pages/RelatoriosPage";
 import { StudentDetailPage } from "./pages/StudentDetailPage";
+import { SobrePage } from "./pages/SobrePage";
 import { StudentsPage } from "./pages/StudentsPage";
 
 /**
@@ -21,6 +22,7 @@ export default function App(): JSX.Element {
           <Route path="alunos/:studentId" element={<StudentDetailPage />} />
           <Route path="agenda" element={<AgendaPage />} />
           <Route path="relatorios" element={<RelatoriosPage />} />
+          <Route path="sobre" element={<SobrePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

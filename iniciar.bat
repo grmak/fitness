@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title Studio Gest - Dev Server
+title CopilotFit - Dev Server
 
 cd /d "%~dp0"
 
