@@ -15,7 +15,7 @@ export function AgendaPage(): JSX.Element {
         <span className="text-xs text-outline">{MOCK_SCHEDULE_ITEMS.length} aulas</span>
       </header>
 
-      <main className="space-y-4 p-4 pb-24">
+      <main className="space-y-2 p-4 pb-24">
         <InsightCard
           icon="lightbulb"
           text="2 turmas precisam de atenção: baixa ocupação às 18:00 e lotação máxima às 19:30."
@@ -34,18 +34,18 @@ export function AgendaPage(): JSX.Element {
           return (
             <article
               key={item.id}
-              className={`rounded-xl border border-outline-variant/30 bg-white p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)] ring-1 ${ringClass}`}
+              className={`rounded-lg border border-outline-variant/30 bg-white p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] ring-1 ${ringClass}`}
             >
-              <div className="mb-2 flex items-start justify-between gap-2">
-                <div>
-                  <p className="text-xs font-label-caps uppercase text-primary">{item.time}</p>
-                  <p className="font-title-md text-on-surface">{item.title}</p>
-                  <p className="text-body-reg text-outline">
+              <div className="mb-1.5 flex items-start gap-2">
+                <span className="shrink-0 pt-0.5 text-[11px] font-bold tabular-nums text-primary">{item.time}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-semibold leading-tight text-on-surface">{item.title}</p>
+                  <p className="text-[11px] leading-snug text-outline">
                     {item.coach} • {item.enrolled}/{item.capacity} vagas
                   </p>
                 </div>
                 <span
-                  className={`shrink-0 rounded-full px-2 py-1 text-[10px] font-bold uppercase ${
+                  className={`shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase leading-none ${
                     level === "full"
                       ? "bg-green-50 text-primary"
                       : level === "low"
@@ -56,10 +56,10 @@ export function AgendaPage(): JSX.Element {
                   {level === "full" ? "Cheio" : level === "low" ? "Baixo" : "Médio"}
                 </span>
               </div>
-              <OccupancyBar pct={item.occupancyPct} level={level} />
+              <OccupancyBar pct={item.occupancyPct} level={level} compact />
               {item.insight && (
-                <p className="mt-2 flex items-center gap-1 text-xs text-outline">
-                  <span className="material-symbols-outlined text-sm">info</span>
+                <p className="mt-1 flex items-center gap-1 truncate text-[10px] text-outline">
+                  <span className="material-symbols-outlined shrink-0 text-[14px]">info</span>
                   {item.insight}
                 </p>
               )}

@@ -6,6 +6,8 @@ interface OccupancyBarProps {
   /** Nível derivado ou explícito. */
   level?: OccupancyLevel;
   showLabel?: boolean;
+  /** Versão reduzida para listas compactas. */
+  compact?: boolean;
 }
 
 /**
@@ -30,20 +32,21 @@ const LEVEL_STYLES: Record<OccupancyLevel, { bar: string; text: string; badge: s
  * Barra de ocupação com cores semafóricas (verde, amarelo, vermelho).
  *
  * @param props - Percentual e opções de exibição.
+ * @param props.compact - Reduz altura da barra e tamanho do rótulo.
  * @returns Barra de progresso com rótulo opcional.
  */
-export function OccupancyBar({ pct, level, showLabel = true }: OccupancyBarProps): JSX.Element {
+export function OccupancyBar({ pct, level, showLabel = true, compact = false }: OccupancyBarProps): JSX.Element {
   const lvl = level ?? getOccupancyLevel(pct);
   const styles = LEVEL_STYLES[lvl];
 
   return (
     <div>
       {showLabel && (
-        <div className="mb-1 flex justify-end">
-          <span className={`text-xs font-bold ${styles.text}`}>{pct}%</span>
+        <div className={`flex justify-end ${compact ? "mb-0.5" : "mb-1"}`}>
+          <span className={`font-bold ${compact ? "text-[10px]" : "text-xs"} ${styles.text}`}>{pct}%</span>
         </div>
       )}
-      <div className="h-2 w-full overflow-hidden rounded-full bg-gray-100">
+      <div className={`w-full overflow-hidden rounded-full bg-gray-100 ${compact ? "h-1.5" : "h-2"}`}>
         <div className={`h-full rounded-full ${styles.bar}`} style={{ width: `${pct}%` }} />
       </div>
     </div>

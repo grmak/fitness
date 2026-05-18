@@ -1,33 +1,68 @@
 import { Link } from "react-router-dom";
 import { Sparkline } from "../components/charts/Sparkline";
-import { SimpleLineChart } from "../components/charts/SimpleLineChart";
 import { InsightCard } from "../components/InsightCard";
 import { OccupancyBar } from "../components/OccupancyBar";
+import type { GoalMetric } from "../data/mock";
 import {
   MOCK_AUTO_INSIGHTS,
   MOCK_BRANDING,
   MOCK_CLASSES_TODAY,
   MOCK_KPIS,
-  MOCK_REVENUE_WEEKS,
+  MOCK_REPORT_FINANCIAL,
+  getDashboardGoals,
   getDashboardPriorityStudents,
+  getDaySummary,
   getPriorityStudentsCount,
 } from "../data/mock";
 
 /**
- * Painel estratégico: KPIs, gráfico principal, ações prioritárias e agenda.
+ * Barra de progresso de meta mensal.
+ *
+ * @param props - Meta com valor atual e alvo.
+ * @param props.goal - Dados da meta.
+ * @returns Barra de progresso compacta.
+ */
+function GoalProgressRow({ goal }: { goal: GoalMetric }): JSX.Element {
+  const pct = Math.min(Math.round((goal.actual / goal.target) * 100), 100);
+  const onTrack = pct >= 90;
+
+  return (
+    <div>
+      <div className="mb-1 flex justify-between text-xs">
+        <span className="font-medium text-on-surface">{goal.label}</span>
+        <span className={onTrack ? "font-bold text-primary" : "font-bold text-secondary"}>
+          {goal.actual}
+          {goal.unit} / {goal.target}
+          {goal.unit}
+        </span>
+      </div>
+      <div className="h-1.5 overflow-hidden rounded-full bg-gray-100">
+        <div
+          className={`h-full rounded-full ${onTrack ? "bg-primary" : "bg-secondary-container"}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Painel estratégico: KPIs, resumo do dia, metas, ações prioritárias e agenda.
  *
  * @returns Página inicial do proprietário.
  */
 export function HomePage(): JSX.Element {
   const priorityStudents = getDashboardPriorityStudents(5);
   const priorityCount = getPriorityStudentsCount();
+  const daySummary = getDaySummary();
+  const dashboardGoals = getDashboardGoals();
 
   return (
     <>
       <header className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-gray-100 bg-white/80 px-4 shadow-sm backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-on-primary">
-            CF
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-on-primary">
+            <span className="material-symbols-outlined text-[20px]">robot_2</span>
           </div>
           <h1 className="text-lg font-extrabold tracking-tight text-[#2E7D32]">{MOCK_BRANDING.appName}</h1>
         </div>
@@ -38,7 +73,6 @@ export function HomePage(): JSX.Element {
       </header>
 
       <main className="space-y-6 p-4 pb-24">
-        {/* 1. KPIs */}
         <section aria-label="Indicadores principais">
           <div className="grid grid-cols-3 gap-2">
             {MOCK_KPIS.map((kpi) => (
@@ -69,18 +103,51 @@ export function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* 2. Gráfico principal */}
-        <section className="rounded-xl bg-white p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)]">
-          <h2 className="mb-1 text-title-md font-title-md text-on-surface">Evolução da receita</h2>
-          <p className="mb-3 text-xs text-outline">Últimas 6 semanas</p>
-          <SimpleLineChart
-            labels={MOCK_REVENUE_WEEKS.map((w) => w.label)}
-            values={MOCK_REVENUE_WEEKS.map((w) => w.value)}
-            valuePrefix="R$ "
-          />
+        <section className="rounded-xl bg-white p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)]" aria-label="Resumo do dia">
+          <h2 className="mb-3 text-title-md font-title-md text-on-surface">Resumo do dia</h2>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded-lg bg-surface-container-low p-2.5">
+              <p className="text-[10px] font-label-caps uppercase text-outline">Aulas hoje</p>
+              <p className="text-lg font-bold text-on-surface">{daySummary.classesToday}</p>
+            </div>
+            <div className="rounded-lg bg-surface-container-low p-2.5">
+              <p className="text-[10px] font-label-caps uppercase text-outline">Ocupação média</p>
+              <p className="text-lg font-bold text-primary">{daySummary.avgOccupancyPct}%</p>
+            </div>
+            <div className="rounded-lg bg-surface-container-low p-2.5">
+              <p className="text-[10px] font-label-caps uppercase text-outline">Turmas críticas</p>
+              <p className="text-lg font-bold text-error">{daySummary.criticalClasses}</p>
+            </div>
+            <div className="rounded-lg bg-surface-container-low p-2.5">
+              <p className="text-[10px] font-label-caps uppercase text-outline">Alunos em risco</p>
+              <p className="text-lg font-bold text-error">{daySummary.atRiskStudents}</p>
+            </div>
+          </div>
         </section>
 
-        {/* Insights automáticos */}
+        <section className="rounded-xl bg-white p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)]" aria-label="Metas do mês">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <h2 className="text-title-md font-title-md text-on-surface">Metas do mês</h2>
+            <Link to="/relatorios" className="shrink-0 text-xs font-label-caps text-primary">
+              VER RELATÓRIOS
+            </Link>
+          </div>
+          <div className="space-y-3">
+            {dashboardGoals.map((goal) => (
+              <GoalProgressRow key={goal.id} goal={goal} />
+            ))}
+          </div>
+          <Link
+            to="/relatorios"
+            className="mt-3 flex items-center justify-between rounded-lg bg-green-50/80 px-3 py-2.5 text-sm active:scale-[0.99]"
+          >
+            <span className="text-on-surface">
+              Margem do mês: <span className="font-bold text-primary">{MOCK_REPORT_FINANCIAL.margin.value}</span>
+            </span>
+            <span className="material-symbols-outlined text-primary">chevron_right</span>
+          </Link>
+        </section>
+
         <section className="space-y-2" aria-label="Insights automáticos">
           <h2 className="text-title-md font-title-md text-on-surface">Insights</h2>
           {MOCK_AUTO_INSIGHTS.map((insight) => (
@@ -88,7 +155,6 @@ export function HomePage(): JSX.Element {
           ))}
         </section>
 
-        {/* 3. Ações prioritárias */}
         <section className="space-y-3">
           <div className="flex items-center justify-between gap-2">
             <h2 className="text-title-md font-title-md text-on-surface">Alunos que precisam de atenção hoje</h2>
@@ -140,29 +206,31 @@ export function HomePage(): JSX.Element {
           </div>
         </section>
 
-        {/* 4. Agenda do dia */}
         <section className="space-y-3">
-          <h2 className="text-title-md font-title-md text-on-surface">Ocupação dos horários – hoje</h2>
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="text-title-md font-title-md text-on-surface">Ocupação dos horários – hoje</h2>
+            <Link to="/agenda" className="shrink-0 text-xs font-label-caps text-primary">
+              VER AGENDA
+            </Link>
+          </div>
           {MOCK_CLASSES_TODAY.map((c) => (
             <div
               key={c.id}
-              className={`rounded-xl bg-white p-4 shadow-[0_4px_12px_rgba(0,0,0,0.05)] ${
+              className={`rounded-lg bg-white p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] ${
                 c.occupancyPct <= 40 ? "ring-1 ring-error/30" : c.occupancyPct >= 85 ? "ring-1 ring-primary/30" : ""
               }`}
             >
-              <div className="mb-2 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="rounded bg-green-50 px-2 py-1 text-xs font-label-caps text-primary">{c.time}</span>
-                  <span className="text-[15px] font-title-md">{c.name}</span>
-                  {c.occupancyPct <= 40 && (
-                    <span className="rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-bold text-error">VAZIA</span>
-                  )}
-                  {c.occupancyPct >= 85 && (
-                    <span className="rounded bg-green-50 px-1.5 py-0.5 text-[10px] font-bold text-primary">LOTADA</span>
-                  )}
-                </div>
+              <div className="mb-1.5 flex items-center gap-2">
+                <span className="rounded bg-green-50 px-1.5 py-0.5 text-[10px] font-label-caps text-primary">{c.time}</span>
+                <span className="truncate text-sm font-semibold">{c.name}</span>
+                {c.occupancyPct <= 40 && (
+                  <span className="rounded bg-red-50 px-1 py-px text-[9px] font-bold text-error">VAZIA</span>
+                )}
+                {c.occupancyPct >= 85 && (
+                  <span className="rounded bg-green-50 px-1 py-px text-[9px] font-bold text-primary">LOTADA</span>
+                )}
               </div>
-              <OccupancyBar pct={c.occupancyPct} />
+              <OccupancyBar pct={c.occupancyPct} compact />
             </div>
           ))}
         </section>

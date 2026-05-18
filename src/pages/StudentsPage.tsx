@@ -13,50 +13,33 @@ import {
 } from "../data/mock";
 
 /**
- * Cartão de aluno na lista segmentada por risco.
+ * Cartão compacto de aluno na lista segmentada por risco.
  *
  * @param props - Propriedades do cartão.
  * @param props.student - Dados do aluno.
- * @returns Cartão clicável com indicadores rápidos.
+ * @returns Linha com resumo do aluno e atalho para o detalhe.
  */
 function StudentListCard({ student }: { student: Student }): JSX.Element {
   const isHighRisk = student.risk === "alto";
 
   return (
     <div
-      className={`rounded-xl border bg-surface-container-lowest p-sm shadow-[0_4px_12px_rgba(0,0,0,0.05)] ${
+      className={`flex items-center gap-2.5 rounded-lg border bg-surface-container-lowest p-2.5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] ${
         isHighRisk ? "border-error/40 bg-error-container/5" : "border-transparent"
       }`}
     >
-      <div className="mb-sm flex items-start justify-between gap-2">
-        <div className="flex gap-sm">
-          {student.avatarUrl ? (
-            <img src={student.avatarUrl} alt="" className="h-12 w-12 rounded-full object-cover" />
-          ) : (
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container-high">
-              <span className="material-symbols-outlined text-outline">person</span>
-            </div>
-          )}
-          <div>
-            <h3 className="font-title-md text-title-md">{student.name}</h3>
-            <p className="text-xs text-gray-500">
-              {student.modality} • {student.shift} • {student.planType}
-            </p>
-            <div className="mt-1 flex flex-wrap gap-1">
-              <span className="rounded bg-surface-container px-1.5 py-0.5 text-[10px] font-bold text-outline">
-                {student.daysSinceVisit}d sem vir
-              </span>
-              {student.consecutiveAbsences > 0 && (
-                <span className="rounded bg-error-container px-1.5 py-0.5 text-[10px] font-bold text-error">
-                  {student.consecutiveAbsences} faltas seguidas
-                </span>
-              )}
-            </div>
-          </div>
+      {student.avatarUrl ? (
+        <img src={student.avatarUrl} alt="" className="h-9 w-9 shrink-0 rounded-full object-cover" />
+      ) : (
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-container-high">
+          <span className="material-symbols-outlined text-[18px] text-outline">person</span>
         </div>
-        <div className="text-right">
+      )}
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-1">
+          <h3 className="truncate text-sm font-semibold leading-tight text-on-surface">{student.name}</h3>
           <span
-            className={`rounded-lg px-2 py-1 font-label-caps text-[10px] ${
+            className={`shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold leading-none ${
               isHighRisk
                 ? "bg-error text-white"
                 : student.risk === "atencao"
@@ -64,28 +47,30 @@ function StudentListCard({ student }: { student: Student }): JSX.Element {
                   : "bg-primary-fixed text-on-primary-fixed-variant"
             }`}
           >
-            Score {student.retentionScore}
+            {student.retentionScore}
           </span>
         </div>
-      </div>
-      <div className="flex gap-xs">
-        <button
-          type="button"
-          className="flex h-11 flex-1 items-center justify-center gap-xs rounded-lg bg-primary font-label-caps text-on-primary active:scale-95"
-        >
-          <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            chat
+        <p className="truncate text-[11px] leading-snug text-gray-500">
+          {student.modality} • {student.shift}
+        </p>
+        <div className="mt-0.5 flex flex-wrap gap-1">
+          <span className="rounded bg-surface-container px-1 py-px text-[9px] font-bold text-outline">
+            {student.daysSinceVisit}d sem vir
           </span>
-          Mensagem
-        </button>
-        <Link
-          to={`/alunos/${student.id}`}
-          className="flex h-11 w-11 items-center justify-center rounded-lg border border-outline-variant text-outline active:scale-95"
-          aria-label={`Ver ${student.name}`}
-        >
-          <span className="material-symbols-outlined">chevron_right</span>
-        </Link>
+          {student.consecutiveAbsences > 0 && (
+            <span className="rounded bg-error-container px-1 py-px text-[9px] font-bold text-error">
+              {student.consecutiveAbsences} faltas
+            </span>
+          )}
+        </div>
       </div>
+      <Link
+        to={`/alunos/${student.id}`}
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary active:scale-95"
+        aria-label={`Ver detalhes de ${student.name}`}
+      >
+        <span className="material-symbols-outlined text-[20px]">chevron_right</span>
+      </Link>
     </div>
   );
 }
@@ -212,7 +197,7 @@ export function StudentsPage(): JSX.Element {
           <h2 className="mb-sm text-title-md font-title-md">
             Lista priorizada ({students.length})
           </h2>
-          <div className="flex flex-col gap-sm">
+          <div className="flex flex-col gap-2">
             {students.map((s) => (
               <StudentListCard key={s.id} student={s} />
             ))}

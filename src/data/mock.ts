@@ -782,6 +782,45 @@ export function getPriorityStudentsCount(): number {
   return MOCK_STUDENTS.filter((s) => s.risk === "alto" || s.daysSinceVisit >= 7).length;
 }
 
+/** Resumo operacional do dia para o painel inicial. */
+export interface DaySummary {
+  classesToday: number;
+  avgOccupancyPct: number;
+  criticalClasses: number;
+  atRiskStudents: number;
+}
+
+/**
+ * Calcula indicadores do resumo do dia (aulas e alunos em risco).
+ *
+ * @returns Métricas operacionais do dia.
+ */
+export function getDaySummary(): DaySummary {
+  const avg =
+    MOCK_CLASSES_TODAY.length === 0
+      ? 0
+      : Math.round(
+          MOCK_CLASSES_TODAY.reduce((sum, c) => sum + c.occupancyPct, 0) / MOCK_CLASSES_TODAY.length,
+        );
+  const critical = MOCK_CLASSES_TODAY.filter((c) => c.occupancyPct <= 40 || c.occupancyPct >= 85).length;
+
+  return {
+    classesToday: MOCK_CLASSES_TODAY.length,
+    avgOccupancyPct: avg,
+    criticalClasses: critical,
+    atRiskStudents: MOCK_RETENTION_METRICS.atRiskCount,
+  };
+}
+
+/**
+ * Metas em destaque no dashboard (novos alunos e retenção).
+ *
+ * @returns Subconjunto de metas para a página inicial.
+ */
+export function getDashboardGoals(): GoalMetric[] {
+  return MOCK_GOALS.filter((g) => g.id === "new-students" || g.id === "retention");
+}
+
 /**
  * Rótulo do score de retenção.
  *
